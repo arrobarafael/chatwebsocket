@@ -52,4 +52,17 @@ export class ConnectionsService {
 
     return connection;
   }
+
+  async updateAdminID(user_id: string, admin_id: string) {
+    console.log('update');
+    console.log(user_id);
+    console.log('admin_id', admin_id);
+    await this.ConnectionsRepository.createQueryBuilder()
+      .update(Connection)
+      .set({ admin_id })
+      .where('user_id = :username', {
+        user_id,
+      })
+      .execute();
+  }
 }
