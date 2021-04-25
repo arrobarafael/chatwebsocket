@@ -33,7 +33,6 @@ export class ConnectionsService {
     const connection = await this.ConnectionsRepository.findOne({
       user_id,
     });
-
     return connection;
   }
 

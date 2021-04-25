@@ -38,8 +38,6 @@ function call(id) {
   };
 
   socket.emit('admin_list_messages_by_user', params, (messages) => {
-    console.log('Messages', messages);
-
     const divMessages = document.getElementById(
       `allMessages${connection.user_id}`
     );
@@ -50,19 +48,32 @@ function call(id) {
       if (message.admin_id === null) {
         createDiv.className = 'admin_message_client';
 
-        createDiv.innerHTML = `<span>${connection.user.email} - ${message.text}</span>`;
+        createDiv.innerHTML = `<span>${connection.user.email} - </span>`;
+        createDiv.innerHTML = `<span>${message.text}</span>`;
         createDiv.innerHTML += `<span class = "admin_date">${dayjs(
           message.created_at
-        ).format('DD/MM/YYYY HH:mm:ss')}`;
+        ).format('DD/MM/YYYY HH:mm:ss')}</span>`;
       } else {
         createDiv.className = 'admin_message_admin';
 
         createDiv.innerHTML = `Atendente: <span>${connection.user.email} - ${message.text}</span>`;
         createDiv.innerHTML = `<span class = "admin_date">${dayjs(
           message.created_at
-        ).format('DD/MM/YYYY HH:mm:ss')}`;
+        ).format('DD/MM/YYYY HH:mm:ss')}</span>`;
       }
       divMessages.appendChild(createDiv);
     });
   });
+}
+
+function sendMessage(id) {
+  console.log('mandar');
+  const text = document.getElementById(`send_message_${id}`);
+
+  const params = {
+    text: text.value,
+    user_id: id,
+  };
+
+  socket.emit('admin_send_message', params);
 }

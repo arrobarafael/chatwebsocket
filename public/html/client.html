@@ -96,19 +96,19 @@
   </body>
 
   <script>
-    onLoad();
+    // onLoad();
     const chat = document.getElementById('chat_help');
 
-    function onLoad() {
-      fetch('http://localhost:3333/settings/admin').then((result) =>
-        result.json().then((response) => {
-          const buttonSupport = document.getElementById('btn_support');
-          if (!response.chat) {
-            buttonSupport.style.display = 'none';
-          }
-        })
-      );
-    }
+    // function onLoad() {
+    //   fetch('http://localhost:3333/settings/admin').then((result) =>
+    //     result.json().then((response) => {
+    //       const buttonSupport = document.getElementById('btn_support');
+    //       if (!response.chat) {
+    //         buttonSupport.style.display = 'none';
+    //       }
+    //     })
+    //   );
+    // }
 
     function openChat() {
       chat.style.display = 'block';

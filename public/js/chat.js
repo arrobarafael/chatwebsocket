@@ -1,12 +1,11 @@
 document.querySelector('#start_chat').addEventListener('click', (event) => {
-  console.log('clicou no botão');
+  const socket = io();
+
   const chat_help = document.getElementById('chat_help');
   chat_help.style.display = 'none';
 
   const chat_in_support = document.getElementById('chat_in_support');
   chat_in_support.style.display = 'block';
-
-  const socket = io();
 
   const email = document.getElementById('email').value;
   const text = document.getElementById('txt_help').value;
@@ -27,7 +26,6 @@ document.querySelector('#start_chat').addEventListener('click', (event) => {
   });
 
   socket.on('client_list_all_messages', (messages) => {
-    console.log('messages', messages);
     let template_client = document.getElementById('message-user-template')
       .innerHTML;
     let template_admin = document.getElementById('admin-template').innerHTML;
@@ -48,5 +46,8 @@ document.querySelector('#start_chat').addEventListener('click', (event) => {
         document.getElementById('messages').innerHTML += rendered;
       }
     });
+  });
+  socket.on('admin_send_to_client', (message) => {
+    console.log(message);
   });
 });
